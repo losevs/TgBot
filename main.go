@@ -6,6 +6,7 @@ import (
 	highlight "tgBot/Highlight"
 	qrcode "tgBot/QrCode"
 	weather "tgBot/Weather"
+	"tgBot/random"
 	"tgBot/token"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -27,7 +28,7 @@ func main() {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 		switch update.Message.Command() {
 		case "help":
-			msg.Text = "/light + Text\n/qr + Text\n/weather + City/Country"
+			msg.Text = "/light + Text\n/qr + Text\n/weather + City/Country\n/dice or /slot\n/roll + Number"
 		case "light":
 			words := strings.Split(update.Message.Text, " ")
 			words = append(words[:0], words[1:]...)
@@ -58,6 +59,34 @@ func main() {
 				continue
 			}
 			msg.Text = response
+		case "slot":
+			conf := tgbotapi.NewDice(update.Message.Chat.ID)
+			conf.Emoji = "🎰"
+			bot.Send(conf)
+			continue
+		case "dice":
+			bot.Send(tgbotapi.NewDice(update.Message.Chat.ID))
+			continue
+		case "roll":
+			words := strings.Split(update.Message.Text, " ")
+
+			if len(words) == 1 {
+				num, err := random.Roll("100")
+				if err != nil {
+					msg.Text = err.Error()
+					bot.Send(msg)
+					continue
+				}
+				msg.Text = fmt.Sprint(num)
+			} else {
+				num, err := random.Roll(words[1])
+				if err != nil {
+					msg.Text = err.Error()
+					bot.Send(msg)
+					continue
+				}
+				msg.Text = fmt.Sprint(num)
+			}
 		default:
 			bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "I don't know this command"))
 		}
