@@ -7,3 +7,6 @@
 ![image](https://github.com/losevs/TgBot/assets/75357413/1b386e3a-21f1-4436-9931-518ecd1f3478)
 
 ![image](https://github.com/losevs/TgBot/assets/75357413/22739b97-2e86-4df8-b741-71ed3a8a45b2)
+
+![image](https://github.com/losevs/TgBot/assets/75357413/62bbfcac-6367-4163-b9f1-d0ca1100d86a)
+
