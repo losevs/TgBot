@@ -60,9 +60,7 @@ func main() {
 			}
 			msg.Text = response
 		case "slot":
-			conf := tgbotapi.NewDice(update.Message.Chat.ID)
-			conf.Emoji = "🎰"
-			bot.Send(conf)
+			bot.Send(tgbotapi.NewDiceWithEmoji(update.Message.Chat.ID, "🎰"))
 			continue
 		case "dice":
 			bot.Send(tgbotapi.NewDice(update.Message.Chat.ID))
@@ -90,8 +88,6 @@ func main() {
 		default:
 			bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "I don't know this command"))
 		}
-
-		//msg := tgbotapi.NewMessage(update.Message.Chat.ID, resultText)
 		msg.ParseMode = tgbotapi.ModeMarkdown
 		//msg.ReplyToMessageID = update.Message.MessageID
 		if _, err := bot.Send(msg); err != nil {
