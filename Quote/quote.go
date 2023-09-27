@@ -7,7 +7,8 @@ import (
 	"io"
 	"math/rand"
 	"net/http"
-	"tgBot/token"
+
+	"github.com/losevs/TgBot/token"
 )
 
 type Text struct {

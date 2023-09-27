@@ -3,14 +3,16 @@ package main
 import (
 	"fmt"
 	"strings"
-	highlight "tgBot/Highlight"
-	qrcode "tgBot/QrCode"
-	quote "tgBot/Quote"
-	weather "tgBot/Weather"
-	"tgBot/currency"
-	"tgBot/help"
-	"tgBot/random"
-	"tgBot/token"
+
+	quote "github.com/losevs/TgBot/Quote"
+	weather "github.com/losevs/TgBot/Weather"
+	"github.com/losevs/TgBot/currency"
+	"github.com/losevs/TgBot/help"
+	"github.com/losevs/TgBot/random"
+	"github.com/losevs/TgBot/token"
+
+	highlight "github.com/losevs/TgBot/Highlight"
+	qrcode "github.com/losevs/TgBot/QrCode"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )

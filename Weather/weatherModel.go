@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"tgBot/token"
 	"time"
+
+	"github.com/losevs/TgBot/token"
 )
 
 type Weather struct {

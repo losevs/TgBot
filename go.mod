@@ -1,4 +1,4 @@
-module tgBot
+module github.com/losevs/TgBot
 
 go 1.20
 
