@@ -6,6 +6,8 @@ import (
 	highlight "tgBot/Highlight"
 	qrcode "tgBot/QrCode"
 	weather "tgBot/Weather"
+	"tgBot/currency"
+	"tgBot/help"
 	"tgBot/random"
 	"tgBot/token"
 
@@ -28,11 +30,15 @@ func main() {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 		switch update.Message.Command() {
 		case "help":
-			msg.Text = "/light + Text\n/qr + Text\n/weather + City/Country\n/dice or /slot\n/roll + Number"
+			msg.Text = help.Help()
+
+		// HIGHLIGHT
 		case "light":
 			words := strings.Split(update.Message.Text, " ")
 			words = append(words[:0], words[1:]...)
 			msg.Text = highlight.Light(words)
+
+		// QR-CODE
 		case "qr":
 			words := strings.Split(update.Message.Text, " ")
 			words = append(words[:0], words[1:]...)
@@ -43,6 +49,8 @@ func main() {
 			}
 			bot.Send(tgbotapi.NewPhoto(update.Message.Chat.ID, qrcode.MakeNewQR(words)))
 			continue
+
+		// WEATHER
 		case "weather":
 			words := strings.Split(update.Message.Text, " ")
 
@@ -59,6 +67,8 @@ func main() {
 				continue
 			}
 			msg.Text = response
+
+		// RANDOM
 		case "slot":
 			bot.Send(tgbotapi.NewDiceWithEmoji(update.Message.Chat.ID, "🎰"))
 			continue
@@ -67,7 +77,6 @@ func main() {
 			continue
 		case "roll":
 			words := strings.Split(update.Message.Text, " ")
-
 			if len(words) == 1 {
 				num, err := random.Roll("100")
 				if err != nil {
@@ -85,8 +94,27 @@ func main() {
 				}
 				msg.Text = fmt.Sprint(num)
 			}
+
+		// CURRENCY
+		case "allcur":
+			msg.Text = currency.AllCurr()
+		case "curr":
+			words := strings.Split(update.Message.Text, " ")
+			if len(words) != 4 {
+				msg.Text = "Bad request"
+				bot.Send(msg)
+				continue
+			}
+			result, err := currency.Convert(words[1], words[2], words[3])
+			if err != nil {
+				msg.Text = err.Error()
+				bot.Send(msg)
+				continue
+			}
+			msg.Text = result
 		default:
 			bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "I don't know this command"))
+			continue
 		}
 		msg.ParseMode = tgbotapi.ModeMarkdown
 		//msg.ReplyToMessageID = update.Message.MessageID
