@@ -12,4 +12,4 @@
 
 ![image](https://github.com/losevs/TgBot/assets/75357413/62bbfcac-6367-4163-b9f1-d0ca1100d86a)
 
-![image](https://github.com/losevs/TgBot/assets/75357413/0916a722-aaeb-44ad-96dd-a2ef4d62b35b)
+![image](https://github.com/losevs/TgBot/assets/75357413/d8f8d828-a9c9-4abf-9a08-d73a786eba76)
