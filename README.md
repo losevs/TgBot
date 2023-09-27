@@ -2,6 +2,8 @@
 
 ## This telegram bot can generate QR-code, send you a day forecast or simply help you read faster.
 
+![image](https://github.com/losevs/TgBot/assets/75357413/e5b5609d-08fc-48a7-a7a7-9c27565701aa)
+
 ![image](https://github.com/losevs/TgBot/assets/75357413/43700e40-7173-4682-a58b-ee08f8da84ec)
 
 ![image](https://github.com/losevs/TgBot/assets/75357413/1b386e3a-21f1-4436-9931-518ecd1f3478)
@@ -10,3 +12,4 @@
 
 ![image](https://github.com/losevs/TgBot/assets/75357413/62bbfcac-6367-4163-b9f1-d0ca1100d86a)
 
+![image](https://github.com/losevs/TgBot/assets/75357413/0916a722-aaeb-44ad-96dd-a2ef4d62b35b)
