@@ -14,5 +14,7 @@ func Help() string {
 		"/curr + *your currency* + *need currency* + *amount*\n" +
 		"***Convert to the chosen currency***\n" +
 		"/allcur\n" +
-		"***See all the available currencies***\n"
+		"***See all the available currencies***\n" +
+		"/quote\n" +
+		"***Random quote***"
 }

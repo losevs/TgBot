@@ -5,6 +5,7 @@ import (
 	"strings"
 	highlight "tgBot/Highlight"
 	qrcode "tgBot/QrCode"
+	quote "tgBot/Quote"
 	weather "tgBot/Weather"
 	"tgBot/currency"
 	"tgBot/help"
@@ -112,6 +113,16 @@ func main() {
 				continue
 			}
 			msg.Text = result
+
+		// QUOTE
+		case "quote":
+			resp, err := quote.NewQuote()
+			if err != nil {
+				msg.Text = err.Error()
+				bot.Send(msg)
+				continue
+			}
+			msg.Text = resp
 		default:
 			bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "I don't know this command"))
 			continue
