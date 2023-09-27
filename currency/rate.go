@@ -22,7 +22,7 @@ func Convert(myCurr, needCurr, amountStr string) (string, error) {
 	}
 	for curr, value := range rates.Values {
 		if curr == myCurr {
-			return fmt.Sprintf("%.2f %s to %s is %.2f", amount, myCurr, needCurr, amount/value), nil
+			return fmt.Sprintf("%.2f %s to %s is %.2f\nrate = %.4f", amount, myCurr, needCurr, amount/value, value), nil
 		}
 	}
 	return "", errors.New("wrong currency name")
