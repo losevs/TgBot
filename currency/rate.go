@@ -1,12 +1,14 @@
 package currency
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
+	"net/http"
 	"strconv"
 	"strings"
 
-	"github.com/adrg/exrates"
+	"github.com/losevs/TgBot/token"
 )
 
 func Convert(myCurr, needCurr, amountStr string) (string, error) {
@@ -16,14 +18,18 @@ func Convert(myCurr, needCurr, amountStr string) (string, error) {
 	}
 	myCurr = strings.ToUpper(myCurr)
 	needCurr = strings.ToUpper(needCurr)
-	rates, err := exrates.Latest(needCurr, nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("https://free.currconv.com/api/v7/convert?q=%s_%s&compact=ultra&apiKey=%s", needCurr, myCurr, token.CONVERT_API), nil)
 	if err != nil {
-		return "", errors.New("wrong currency name")
+		return "", fmt.Errorf("API request error")
 	}
-	for curr, value := range rates.Values {
-		if curr == myCurr {
-			return fmt.Sprintf("%.2f %s to %s is %.2f\nrate = %.4f", amount, myCurr, needCurr, amount/value, value), nil
-		}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return "", err
 	}
-	return "", errors.New("wrong currency name")
+	var data map[string]float64
+	err = json.NewDecoder(resp.Body).Decode(&data)
+	if err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%.2f %s to %s is %.2f\nrate = %.4f", amount, myCurr, needCurr, amount/data[fmt.Sprintf("%s_%s", needCurr, myCurr)], data[fmt.Sprintf("%s_%s", needCurr, myCurr)]), nil
 }
