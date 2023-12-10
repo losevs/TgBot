@@ -8,6 +8,7 @@ import (
 	weather "github.com/losevs/TgBot/Weather"
 	"github.com/losevs/TgBot/currency"
 	"github.com/losevs/TgBot/help"
+	love "github.com/losevs/TgBot/love_percentage"
 	"github.com/losevs/TgBot/random"
 	"github.com/losevs/TgBot/token"
 
@@ -125,6 +126,17 @@ func main() {
 				continue
 			}
 			msg.Text = resp
+
+		// LOVE
+		case "love":
+			words := strings.Split(update.Message.Text, " ")
+			perc, resp, err := love.LoveCh(words[1], words[2])
+			if err != nil {
+				msg.Text = err.Error()
+				bot.Send(msg)
+				continue
+			}
+			msg.Text = fmt.Sprintf("%s%%\n%s", perc, resp)
 		default:
 			bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "I don't know this command"))
 			continue

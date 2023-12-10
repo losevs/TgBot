@@ -16,5 +16,7 @@ func Help() string {
 		"/allcur\n" +
 		"***See all the available currencies***\n" +
 		"/quote\n" +
-		"***Random quote***"
+		"***Random quote***\n" +
+		"/love + *name* + *name*\n" +
+		"***Check love chances between 2 people***\n"
 }
